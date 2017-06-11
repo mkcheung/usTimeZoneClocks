@@ -1,0 +1,21 @@
+.clock{
+	height:100px;
+	width:100px;
+	border: solid 2px black;
+	border-radius: 50px;
+	position: absolute;
+}
+.timezone{
+	display: inline-block;
+}
+
+.hand {
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  right: 50%;
+  top: 50%;
+  background: black;
+  transform-origin: 100%;
+  transform:rotate(90deg);
+}
