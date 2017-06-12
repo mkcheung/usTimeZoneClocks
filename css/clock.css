@@ -9,6 +9,37 @@
 	display: inline-block;
 }
 
+.hand-second-pacific {
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  right: 50%;
+  top: 50%;
+  background: black;
+  transform-origin: 100%;
+  transform:rotate(90deg);
+}
+.hand-minute-pacific {
+  position: absolute;
+  width: 40%;
+  height: 3px;
+  right: 50%;
+  top: 50%;
+  background: black;
+  transform-origin: 100%;
+  transform:rotate(90deg);
+}
+.hand-hour-pacific {
+  position: absolute;
+  width: 30%;
+  height: 3px;
+  right: 50%;
+  top: 50%;
+  background: black;
+  transform-origin: 100%;
+  transform:rotate(90deg);
+}
+
 .hand-second-mountain {
   position: absolute;
   width: 50%;
