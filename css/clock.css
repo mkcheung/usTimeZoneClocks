@@ -4,8 +4,28 @@
 	border: solid 2px black;
 	border-radius: 50px;
 	position: absolute;
+	top:45px;
+	left:45px;
 }
 .timezone{
+	height:200px;
+	width:200px;
+	position: relative;
+	display: inline-block;
+}
+.title{
+	height:20px;
+	width:200px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.digital{
+	height:20px;
+	width:200px;
+	text-align: center;
+	vertical-align: middle;
 	display: inline-block;
 }
 
