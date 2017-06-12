@@ -1,15 +1,15 @@
-function calculateUTCTime(){
+function calculateTimeRelativeToUTC(offset){
 	const date = new Date();
 	const localTime = date.getTime();
 	const localOffset = date.getTimezoneOffset() * 60000;
 	const utc = localTime + localOffset;
-	return utc;
+	const time = utc - (3600000*offset);
+	return time;
 }
 
 
 function runPacificClock(){
-	const utc = calculateUTCTime();
-	const pacificTime = utc - (3600000*7);
+	const pacificTime = calculateTimeRelativeToUTC(7);
 	const pacificDate = new Date(pacificTime);
 
 	let pacificSeconds = pacificDate.getSeconds();
@@ -34,13 +34,11 @@ function runPacificClock(){
 	secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 	minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 	hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-	console.log('Pacific Time: ' + utc + ' ' + pacificDate);
 }
 
 
 function runMountainClock(){
-	const utc = calculateUTCTime();
-	const mountainTime = utc - (3600000*6);
+	const mountainTime = calculateTimeRelativeToUTC(6);
 	const mountainDate = new Date(mountainTime); 
 
 	let mountainSeconds = mountainDate.getSeconds();
@@ -65,12 +63,10 @@ function runMountainClock(){
 	secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 	minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 	hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-	console.log('Mountain Time: ' + mountainDate);
 }
 
 function runCentralClock(){
-	const utc = calculateUTCTime();
-	const centralTime = utc - (3600000*5);
+	const centralTime = calculateTimeRelativeToUTC(5);
 	const centralDate = new Date(centralTime);
 
 	let seconds = centralDate.getSeconds();
@@ -96,13 +92,10 @@ function runCentralClock(){
 	minutes = (minutes<10)? '0'+minutes : minutes;
 	hours = (hours<10)? '0'+hours : hours;
 	document.getElementById('central-digital').innerHTML = hours+':'+minutes+':'+seconds;
-
-	console.log('Central Time: ' + centralDate);
 }
 
 function runEasternClock(){
-	const utc = calculateUTCTime();
-	const easternTime = utc - (3600000*4);
+	const easternTime = calculateTimeRelativeToUTC(4);
 	const easternDate = new Date(easternTime);
 
 	let seconds = easternDate.getSeconds();
@@ -126,7 +119,6 @@ function runEasternClock(){
 	minutes = (minutes<10)? '0'+minutes : minutes;
 	hours = (hours<10)? '0'+hours : hours;
 	document.getElementById('eastern-digital').innerHTML = hours+':'+minutes+':'+seconds;
-	console.log('Eastern Time: ' + easternDate);
 }
 
 function animateClocks(){
