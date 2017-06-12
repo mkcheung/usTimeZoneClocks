@@ -7,25 +7,36 @@ function calculateTimeRelativeToUTC(offset){
 	return time;
 }
 
+function adjustDigitalTimeUnitCosmetics(hours, minutes, seconds){
+	const theTime = [hours, minutes, seconds];
+
+	const letZeroAheadTime = theTime.map((unit) => 
+		((unit<10)? '0'+unit : unit)
+	);
+
+	return letZeroAheadTime[0]+':'+letZeroAheadTime[1]+':'+letZeroAheadTime[2];
+}
+
+function adjust24HoursTo12Hours(hours){
+	return (hours > 12) ? (hours - 12) : hours;
+}
+
 
 function runPacificClock(){
-	const pacificTime = calculateTimeRelativeToUTC(7);
-	const pacificDate = new Date(pacificTime);
+	let pacificTime = calculateTimeRelativeToUTC(7);
+	let pacificDate = new Date(pacificTime);
 
 	let pacificSeconds = pacificDate.getSeconds();
 	let pacificMinutes = pacificDate.getMinutes();
 	let pacificHours = pacificDate.getHours();
 
-	pacificHours = (pacificHours > 12) ? (pacificHours - 12) : pacificHours;
+	pacificHours = adjust24HoursTo12Hours(pacificHours);
+
 	let secondsDegrees = (pacificSeconds * 6) + 90;
 	let minutesDegrees = (pacificMinutes * 6) + 90;
 	let hoursDegrees = (pacificHours * 30) + 90;
-
 	
-	pacificSeconds = (pacificSeconds<10)? '0'+pacificSeconds : pacificSeconds;
-	pacificMinutes = (pacificMinutes<10)? '0'+pacificMinutes : pacificMinutes;
-	pacificHours = (pacificHours<10)? '0'+pacificHours : pacificHours;
-	document.getElementById('pacific-digital').innerHTML = pacificHours+':'+pacificMinutes+':'+pacificSeconds;
+	document.getElementById('pacific-digital').innerHTML = adjustDigitalTimeUnitCosmetics(pacificHours, pacificMinutes, pacificSeconds);
 
 	let secondHand = document.querySelector(`.hand-second-pacific`);
 	let minuteHand = document.querySelector(`.hand-minute-pacific`);
@@ -38,23 +49,19 @@ function runPacificClock(){
 
 
 function runMountainClock(){
-	const mountainTime = calculateTimeRelativeToUTC(6);
-	const mountainDate = new Date(mountainTime); 
+	let mountainTime = calculateTimeRelativeToUTC(6);
+	let mountainDate = new Date(mountainTime); 
 
 	let mountainSeconds = mountainDate.getSeconds();
 	let mountainMinutes = mountainDate.getMinutes();
 	let mountainHours = mountainDate.getHours();
 
-	mountainHours = (mountainHours > 12) ? (mountainHours - 12) : mountainHours;
+	mountainHours = adjust24HoursTo12Hours(mountainHours);
 	let secondsDegrees = (mountainSeconds * 6) + 90;
 	let minutesDegrees = (mountainMinutes * 6) + 90;
 	let hoursDegrees = (mountainHours * 30) + 90;
 
-	mountainSeconds = (mountainSeconds<10)? '0'+mountainSeconds : mountainSeconds;
-	mountainMinutes = (mountainMinutes<10)? '0'+mountainMinutes : mountainMinutes;
-	mountainHours = (mountainHours<10)? '0'+mountainHours : mountainHours;
-
-	document.getElementById('mountain-digital').innerHTML = mountainHours+':'+mountainMinutes+':'+mountainSeconds;
+	document.getElementById('mountain-digital').innerHTML = adjustDigitalTimeUnitCosmetics(mountainHours, mountainMinutes, mountainSeconds);
 
 	let secondHand = document.querySelector(`.hand-second-mountain`);
 	let minuteHand = document.querySelector(`.hand-minute-mountain`);
@@ -66,19 +73,19 @@ function runMountainClock(){
 }
 
 function runCentralClock(){
-	const centralTime = calculateTimeRelativeToUTC(5);
-	const centralDate = new Date(centralTime);
+	let centralTime = calculateTimeRelativeToUTC(5);
+	let centralDate = new Date(centralTime);
 
-	let seconds = centralDate.getSeconds();
-	let minutes = centralDate.getMinutes();
-	let hours = centralDate.getHours();
+	let centralSeconds = centralDate.getSeconds();
+	let centralMinutes = centralDate.getMinutes();
+	let centralHours = centralDate.getHours();
 
-	hours = (hours > 12) ? (hours - 12) : hours;
-	let secondsDegrees = (seconds * 6) + 90;
-	let minutesDegrees = (minutes * 6) + 90;
-	let hoursDegrees = (hours * 30) + 90;
+	centralHours = adjust24HoursTo12Hours(centralHours);
+	let secondsDegrees = (centralSeconds * 6) + 90;
+	let minutesDegrees = (centralMinutes * 6) + 90;
+	let hoursDegrees = (centralHours * 30) + 90;
 
-	document.getElementById('central-digital').innerHTML = hours+':'+minutes+':'+seconds;
+	document.getElementById('central-digital').innerHTML = adjustDigitalTimeUnitCosmetics(centralHours, centralMinutes, centralSeconds);
 
 	let secondHand = document.querySelector(`.hand-second-central`);
 	let minuteHand = document.querySelector(`.hand-minute-central`);
@@ -88,24 +95,25 @@ function runCentralClock(){
 	minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 	hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
 
-	seconds = (seconds<10)? '0'+seconds : seconds;
-	minutes = (minutes<10)? '0'+minutes : minutes;
-	hours = (hours<10)? '0'+hours : hours;
-	document.getElementById('central-digital').innerHTML = hours+':'+minutes+':'+seconds;
+	centralSeconds = (centralSeconds<10)? '0'+centralSeconds : centralSeconds;
+	centralMinutes = (centralMinutes<10)? '0'+centralMinutes : centralMinutes;
+	centralHours = (centralHours<10)? '0'+centralHours : centralHours;
 }
 
 function runEasternClock(){
-	const easternTime = calculateTimeRelativeToUTC(4);
-	const easternDate = new Date(easternTime);
+	let easternTime = calculateTimeRelativeToUTC(4);
+	let easternDate = new Date(easternTime);
 
-	let seconds = easternDate.getSeconds();
-	let minutes = easternDate.getMinutes();
-	let hours = easternDate.getHours();
-	hours = (hours > 12) ? (hours - 12) : hours;
+	let easternSeconds = easternDate.getSeconds();
+	let easternMinutes = easternDate.getMinutes();
+	let easternHours = easternDate.getHours();
+	easternHours = adjust24HoursTo12Hours(easternHours);
 
-	let secondsDegrees = (seconds * 6) + 90;
-	let minutesDegrees = (minutes * 6) + 90;
-	let hoursDegrees = (hours * 30) + 90;
+	let secondsDegrees = (easternSeconds * 6) + 90;
+	let minutesDegrees = (easternMinutes * 6) + 90;
+	let hoursDegrees = (easternHours * 30) + 90;
+
+	document.getElementById('eastern-digital').innerHTML = adjustDigitalTimeUnitCosmetics(easternHours, easternMinutes, easternSeconds);
 
 	let secondHand = document.querySelector(`.hand-second-eastern`);
 	let minuteHand = document.querySelector(`.hand-minute-eastern`);
@@ -115,10 +123,9 @@ function runEasternClock(){
 	minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 	hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
 
-	seconds = (seconds<10)? '0'+seconds : seconds;
-	minutes = (minutes<10)? '0'+minutes : minutes;
-	hours = (hours<10)? '0'+hours : hours;
-	document.getElementById('eastern-digital').innerHTML = hours+':'+minutes+':'+seconds;
+	easternSeconds = (easternSeconds<10)? '0'+easternSeconds : easternSeconds;
+	easternMinutes = (easternMinutes<10)? '0'+easternMinutes : easternMinutes;
+	easternHours = (easternHours<10)? '0'+easternHours : easternHours;
 }
 
 function animateClocks(){
